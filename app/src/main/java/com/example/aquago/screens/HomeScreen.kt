@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
@@ -19,9 +20,15 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+
+
+// =====================================================
+// HOME SCREEN
+// =====================================================
 
 @Composable
 fun HomeScreen(
@@ -36,24 +43,41 @@ fun HomeScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
+            .background(
+                MaterialTheme.colorScheme.background
+            )
     ) {
+
+        // =====================================================
+        // MAIN HOME CONTENT
+        // =====================================================
 
         Column(
             modifier = Modifier
                 .weight(1f)
-                .verticalScroll(rememberScrollState())
-                .padding(20.dp)
+                .verticalScroll(
+                    rememberScrollState()
+                )
+                .padding(
+                    start = 20.dp,
+                    end = 20.dp,
+                    top = 20.dp
+                )
         ) {
 
+            // APP NAME
             Text(
                 text = "AquaGo",
                 style = MaterialTheme.typography.headlineLarge,
                 fontWeight = FontWeight.Bold
             )
 
-            Spacer(Modifier.height(20.dp))
+            Spacer(
+                modifier = Modifier.height(20.dp)
+            )
 
+
+            // DELIVERY ADDRESS
             Text(
                 text = "Delivering to",
                 style = MaterialTheme.typography.labelLarge
@@ -65,12 +89,21 @@ fun HomeScreen(
                 fontWeight = FontWeight.Bold
             )
 
-            Spacer(Modifier.height(20.dp))
+            Spacer(
+                modifier = Modifier.height(20.dp)
+            )
+
+
+            // =====================================================
+            // SMART REORDER
+            // =====================================================
 
             Card(
+                modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(20.dp),
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer
+                    containerColor =
+                        MaterialTheme.colorScheme.primaryContainer
                 )
             ) {
 
@@ -84,13 +117,21 @@ fun HomeScreen(
                         fontWeight = FontWeight.Bold
                     )
 
-                    Spacer(Modifier.height(6.dp))
-
-                    Text(
-                        text = "Looks like you're running low on Alkaline Water. Reorder now?"
+                    Spacer(
+                        modifier = Modifier.height(6.dp)
                     )
 
-                    Spacer(Modifier.height(12.dp))
+                    Text(
+                        text = "Looks like you're running low on Alkaline Water."
+                    )
+
+                    Text(
+                        text = "Reorder now?"
+                    )
+
+                    Spacer(
+                        modifier = Modifier.height(12.dp)
+                    )
 
                     Text(
                         text = "5G Alkaline Jug",
@@ -101,7 +142,9 @@ fun HomeScreen(
                         text = "Last ordered 12 days ago"
                     )
 
-                    Spacer(Modifier.height(6.dp))
+                    Spacer(
+                        modifier = Modifier.height(6.dp)
+                    )
 
                     Text(
                         text = "$14.99",
@@ -111,16 +154,28 @@ fun HomeScreen(
                 }
             }
 
-            Spacer(Modifier.height(24.dp))
+
+            Spacer(
+                modifier = Modifier.height(24.dp)
+            )
+
+
+            // =====================================================
+            // FEATURED SUPPLIERS
+            // =====================================================
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween
+                horizontalArrangement =
+                    Arrangement.SpaceBetween,
+                verticalAlignment =
+                    Alignment.CenterVertically
             ) {
 
                 Text(
                     text = "Featured Suppliers",
-                    style = MaterialTheme.typography.titleLarge,
+                    style =
+                        MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.Bold
                 )
 
@@ -128,11 +183,19 @@ fun HomeScreen(
                     text = "See All",
                     modifier = Modifier.clickable {
                         onSuppliersClick()
-                    }
+                    },
+                    color =
+                        MaterialTheme.colorScheme.primary
                 )
             }
 
-            Spacer(Modifier.height(12.dp))
+
+            Spacer(
+                modifier = Modifier.height(12.dp)
+            )
+
+
+            // SUPPLIER 1
 
             SupplierPreviewCard(
                 name = "Crystal Springs Local",
@@ -142,7 +205,13 @@ fun HomeScreen(
                 onClick = onSuppliersClick
             )
 
-            Spacer(Modifier.height(12.dp))
+
+            Spacer(
+                modifier = Modifier.height(12.dp)
+            )
+
+
+            // SUPPLIER 2
 
             SupplierPreviewCard(
                 name = "AquaPure Depot",
@@ -152,7 +221,15 @@ fun HomeScreen(
                 onClick = onSuppliersClick
             )
 
-            Spacer(Modifier.height(24.dp))
+
+            Spacer(
+                modifier = Modifier.height(24.dp)
+            )
+
+
+            // =====================================================
+            // PRODUCTS
+            // =====================================================
 
             Card(
                 modifier = Modifier
@@ -169,26 +246,57 @@ fun HomeScreen(
 
                     Text(
                         text = "Browse Water Products",
-                        style = MaterialTheme.typography.titleMedium,
+                        style =
+                            MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.Bold
                     )
 
+                    Spacer(
+                        modifier = Modifier.height(6.dp)
+                    )
+
                     Text(
-                        text = "Find purified, alkaline, mineral and filtered water."
+                        text =
+                            "Find purified, alkaline, mineral and filtered water."
                     )
                 }
             }
+
+
+            // Space above bottom navigation
+
+            Spacer(
+                modifier = Modifier.height(20.dp)
+            )
         }
 
-        BottomNavigationBar(
-            onHome = {},
+
+        // =====================================================
+        // FIXED BOTTOM NAVIGATION
+        // =====================================================
+
+        AquaGoBottomBar(
+            onHome = {
+                // Already on Home
+            },
+
             onExplore = onSuppliersClick,
+
             onOrders = onOrdersClick,
+
+            onCart = onCartClick,
+
             onProfile = onProfileClick,
+
             onNotifications = onNotificationsClick
         )
     }
 }
+
+
+// =====================================================
+// SUPPLIER CARD
+// =====================================================
 
 @Composable
 private fun SupplierPreviewCard(
@@ -205,6 +313,7 @@ private fun SupplierPreviewCard(
             .clickable {
                 onClick()
             },
+
         shape = RoundedCornerShape(18.dp)
     ) {
 
@@ -214,33 +323,55 @@ private fun SupplierPreviewCard(
 
             Text(
                 text = name,
-                style = MaterialTheme.typography.titleMedium,
+                style =
+                    MaterialTheme.typography.titleMedium,
                 fontWeight = FontWeight.Bold
             )
 
-            Spacer(Modifier.height(6.dp))
+            Spacer(
+                modifier = Modifier.height(6.dp)
+            )
 
-            Row {
+            Row(
+                verticalAlignment =
+                    Alignment.CenterVertically
+            ) {
 
-                Text(text = "★ $rating")
+                Text(
+                    text = "★ $rating"
+                )
 
-                Spacer(Modifier.width(16.dp))
+                Spacer(
+                    modifier = Modifier.width(16.dp)
+                )
 
-                Text(text = deliveryTime)
+                Text(
+                    text = deliveryTime
+                )
             }
 
-            Spacer(Modifier.height(4.dp))
+            Spacer(
+                modifier = Modifier.height(4.dp)
+            )
 
-            Text(text = deliveryFee)
+            Text(
+                text = deliveryFee
+            )
         }
     }
 }
 
+
+// =====================================================
+// AQUAGO BOTTOM NAVIGATION
+// =====================================================
+
 @Composable
-fun BottomNavigationBar(
+fun AquaGoBottomBar(
     onHome: () -> Unit,
     onExplore: () -> Unit,
     onOrders: () -> Unit,
+    onCart: () -> Unit,
     onProfile: () -> Unit,
     onNotifications: () -> Unit
 ) {
@@ -248,28 +379,109 @@ fun BottomNavigationBar(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 10.dp, vertical = 8.dp),
-        horizontalArrangement = Arrangement.SpaceEvenly
+            .background(
+                MaterialTheme.colorScheme.surface
+            )
+            .navigationBarsPadding()
+            .padding(
+                top = 10.dp,
+                bottom = 10.dp
+            ),
+
+        horizontalArrangement =
+            Arrangement.SpaceEvenly,
+
+        verticalAlignment =
+            Alignment.CenterVertically
+    ) {
+
+
+        // HOME
+
+        NavigationItem(
+            symbol = "⌂",
+            label = "Home",
+            onClick = onHome
+        )
+
+
+        // EXPLORE
+
+        NavigationItem(
+            symbol = "◉",
+            label = "Explore",
+            onClick = onExplore
+        )
+
+
+        // ORDERS
+
+        NavigationItem(
+            symbol = "🛒",
+            label = "Orders",
+            onClick = onOrders
+        )
+
+
+        // NOTIFICATIONS
+
+        NavigationItem(
+            symbol = "🔔",
+            label = "Alerts",
+            onClick = onNotifications
+        )
+
+
+        // PROFILE
+
+        NavigationItem(
+            symbol = "●",
+            label = "Profile",
+            onClick = onProfile
+        )
+    }
+}
+
+
+// =====================================================
+// NAVIGATION ITEM
+// =====================================================
+
+@Composable
+private fun NavigationItem(
+    symbol: String,
+    label: String,
+    onClick: () -> Unit
+) {
+
+    Column(
+        modifier = Modifier
+            .clickable {
+                onClick()
+            }
+            .padding(
+                horizontal = 8.dp,
+                vertical = 4.dp
+            ),
+
+        horizontalAlignment =
+            Alignment.CenterHorizontally
     ) {
 
         Text(
-            text = "Home",
-            modifier = Modifier.clickable { onHome() }
+            text = symbol,
+            style =
+                MaterialTheme.typography.titleMedium
+        )
+
+        Spacer(
+            modifier = Modifier.height(2.dp)
         )
 
         Text(
-            text = "Explore",
-            modifier = Modifier.clickable { onExplore() }
-        )
-
-        Text(
-            text = "Orders",
-            modifier = Modifier.clickable { onOrders() }
-        )
-
-        Text(
-            text = "Profile",
-            modifier = Modifier.clickable { onProfile() }
+            text = label,
+            style =
+                MaterialTheme.typography.labelSmall
         )
     }
 }
